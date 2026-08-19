@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi Kamera - SMKN 4 Semarang</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent-glow: #38bdf8;
+            --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+            --btn-hover: linear-gradient(135deg, #0284c7 0%, #6366f1 50%, #a855f7 100%);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(192, 132, 252, 0.15) 0%, transparent 40%);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Judul Sekolah */
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+            margin-bottom: 30px;
+        }
+
+        /* Card Informasi File */
+        .doc-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .camera-icon {
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .doc-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* Section Timer & Status */
+        .status-box {
+            margin-bottom: 25px;
+        }
+
+        .status-text {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(56, 189, 248, 0.2);
+            border-top: 2px solid #38bdf8;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .timer-badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-glow);
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 6px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        /* Animated Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+
+        /* Tombol Penelusuran */
+        .btn-action {
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: #64748b;
+            cursor: not-allowed;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-ready {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-ready:hover {
+            background: var(--btn-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-ready:active {
+            transform: translateY(0);
+        }
+
+        footer {
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Nama Sekolah -->
+        <h1 class="header-title">SMKN 4 SEMARANG</h1>
+        <div class="divider"></div>
+
+        <!-- Deskripsi Dokumentasi -->
+        <div class="doc-card">
+            <span class="camera-icon">📷</span>
+            <span class="doc-title">File dokumentasi kamera</span>
+        </div>
+
+        <!-- Timer & Indikator Loading -->
+        <div class="status-box">
+            <p class="status-text" id="status-text">
+                <span class="spinner" id="spinner"></span>
+                Memproses berkas... Silakan tunggu
+            </p>
+            <div class="timer-badge" id="timer-display">15 Detik</div>
+        </div>
+
+        <!-- Progress Bar Real-time -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <!-- Tombol Penelusuran (Di-lock selama 15 detik) -->
+        <a id="btn-search" class="btn-action btn-disabled" href="#" target="_blank" onclick="return checkReady(event)">
+            <span>🔍</span>
+            <span id="btn-text">Menyiapkan Penelusuran...</span>
+        </a>
+
+        <footer>
+            &copy; SMKN 4 Semarang — System Process
+        </footer>
+    </div>
+
+    <script>
+        const targetUrl = "https://drive.google.com/drive/mobile/folders/1oQTbj8q5Y5ewzuCgm-XhjZHGHgv10Tkr?hl=ID&fbclid=PAb21jcATyfP9wZG9mAmV4dG4DYWVtAjExAHNydGMGYXBwX2lkDzU2NzA2NzM0MzM1MjQyNwABp8fq_xfgokHhJelm--sDneg9m66f0COrwYu7525zR5_pfugiOXDs7t8cfHno_aem_rJfWYc6I_jqb135GtAhxdg";
+        
+        let timeLeft = 15;
+        const totalTime = 15;
+        
+        const timerDisplay = document.getElementById("timer-display");
+        const progressBar = document.getElementById("progress-bar");
+        const statusText = document.getElementById("status-text");
+        const btnSearch = document.getElementById("btn-search");
+        const btnText = document.getElementById("btn-text");
+        const spinner = document.getElementById("spinner");
+
+        let isReady = false;
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            
+            // Hitung mundur real-time
+            if (timeLeft > 0) {
+                timerDisplay.textContent = timeLeft + " Detik";
+            } else {
+                timerDisplay.textContent = "Selesai!";
+            }
+
+            // Animasi Progress Bar
+            const progressPercent = ((totalTime - timeLeft) / totalTime) * 100;
+            progressBar.style.width = progressPercent + "%";
+
+            // Saat waktu habis (15 detik selesai)
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                isReady = true;
+
+                // Perbarui tampilan status & aktifkan tombol
+                spinner.style.display = "none";
+                statusText.innerHTML = "✨ Berkas siap dibuka!";
+                timerDisplay.style.background = "rgba(52, 211, 153, 0.15)";
+                timerDisplay.style.color = "#34d399";
+                timerDisplay.style.borderColor = "rgba(52, 211, 153, 0.3)";
+
+                btnSearch.classList.remove("btn-disabled");
+                btnSearch.classList.add("btn-ready");
+                btnSearch.href = targetUrl;
+                btnText.textContent = "Buka Penelusuran Kamera";
+            }
+        }, 1000);
+
+        function checkReady(e) {
+            if (!isReady) {
+                e.preventDefault();
+                alert("Harap tunggu hingga proses hitung mundur selesai (15 detik).");
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
